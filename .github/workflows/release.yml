@@ -47,4 +47,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: LuxoriaApp
-          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/publish/*
+          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/bin/$env:Configuration/$env:Platform/publish/
