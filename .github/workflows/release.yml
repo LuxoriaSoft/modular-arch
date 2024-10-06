@@ -47,9 +47,13 @@ jobs:
         run: Get-ChildItem -Recurse ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/
         shell: pwsh
       
+      - name: Zip the published app
+        run: Compress-Archive -Path ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/ -DestinationPath ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.zip
+        shell: pwsh
+      
       # Upload the published app
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
           name: LuxoriaApp
-          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/bin
+          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.zip
