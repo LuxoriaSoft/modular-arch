@@ -4,6 +4,14 @@ jobs:
   build:
     runs-on: windows-latest
 
+    strategy:
+      matrix:
+        configuration: [Release]
+        platform: [x64, x86]
+
+    env:
+      Solution_Name: Luxoria.App.sln
+
     steps:
       # Checkout the code from the repository
       - name: Checkout code
@@ -14,18 +22,35 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.x'  # Specify the .NET SDK version you are using
+      
+      # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      
+      # Restore the application to populate the obj folder with RuntimeIdentifiers
+      - name: Restore the application
+        run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+        env:
+          Configuration: ${{ matrix.configuration }}
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
 
       # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore
         working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
 
-      # Build the project
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      # Create the app by building and publishing the project
+      - name: Create the app
+        run: msbuild $env:Solution_Name /t:Publish /p:Configuration=$env:Configuration /p:Platform=$env:Platform
+        env:
+          Configuration: ${{ matrix.configuration }}
+          Platform: ${{ matrix.platform }}
         working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
       
-      # Publish the app for Windows (Self-contained)
-      - name: Publish
-        run: dotnet publish -c Release -r win10-x64 --self-contained --output ./publish
+      # Upload the app
+      - name: Upload app
+        uses: actions/upload-artifact@v2
+        with:
+          name: Upload app
+          path: ${{ env.Solution_Name }}\\bin
         working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
