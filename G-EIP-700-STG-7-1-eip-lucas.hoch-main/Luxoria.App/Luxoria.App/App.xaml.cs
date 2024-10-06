@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System;
+using Luxoria.Core.Interfaces;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -20,6 +21,8 @@ namespace Luxoria.App
     {
         private readonly Startup _startup;
         private readonly IHost _host;
+        
+        private readonly IModuleService _moduleService;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -29,6 +32,7 @@ namespace Luxoria.App
             this.InitializeComponent();
             _startup = new Startup();
             _host = CreateHostBuilder(_startup).Build();
+            _moduleService = _host.Services.GetRequiredService<IModuleService>();
         }
 
         public static IHostBuilder CreateHostBuilder(Startup startup)
@@ -105,7 +109,7 @@ namespace Luxoria.App
                     });
 
                     // Small delay to ensure the splash screen updates properly
-                    await Task.Delay(1000); // 1 second delay
+                    await Task.Delay(500); // 0.5 second delay
 
                     try
                     {
@@ -115,10 +119,12 @@ namespace Luxoria.App
                             IModule module = loader.LoadModule(moduleFile);
                             if (module != null)
                             {
-                                // Initialize the module
-                                module.Initialize(scope.ServiceProvider.GetService<IModuleContext>());
-
+                                // Display module information
                                 Debug.WriteLine($"Module loaded: {moduleName}");
+                                Debug.WriteLine($"Module name: {module.Name}");
+                                Debug.WriteLine($"Module description: {module.Description}");
+                                // Save the module to ModuleService
+                                _moduleService.AddModule(module);
                             }
                             else
                             {
@@ -139,6 +145,16 @@ namespace Luxoria.App
                         Debug.WriteLine($"Failed to load module [{moduleFile}]: {ex.Message}");
                     }
                 }
+
+                // Update the splash screen with the module name being loaded
+                splashScreen.DispatcherQueue.TryEnqueue(() =>
+                {
+                    splashScreen.CurrentModuleTextBlock.Text = $"Initializing modules...";
+                });
+
+                // Small delay to ensure the splash screen updates properly
+                await Task.Delay(500); // 0.5 second delay
+                _moduleService.InitializeModules(new ModuleContext());
             }
         }
 

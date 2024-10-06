@@ -1,4 +1,6 @@
 ﻿using Luxoria.Core;
+using Luxoria.Core.Interfaces;
+using Luxoria.Core.Services;
 using Luxoria.Modules;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +16,8 @@ namespace Luxoria.App
         {
             Debug.WriteLine("Configuring services...");
             // Register services here
+
+            services.AddSingleton<IModuleService, ModuleService>();
 
             Debug.WriteLine("Services registered successfully !");
         }
