@@ -1,0 +1,29 @@
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up .NET SDK
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'  # Specify the .NET SDK version you are using
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main
+
+      # Build the project
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main
+      
+      # Publish the app for Windows (Self-contained)
+      - name: Publish
+        run: dotnet publish -c Release -r win10-x64 --self-contained --output ./publish
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main
