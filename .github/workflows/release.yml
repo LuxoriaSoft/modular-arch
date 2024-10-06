@@ -44,7 +44,7 @@ jobs:
       
         # Verify output directory
       - name: List output directory recursively
-        run: Get-ChildItem -Recurse ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/bin/
+        run: Get-ChildItem -Recurse ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/
         shell: pwsh
       
       # Upload the published app
@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: LuxoriaApp
-          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/bin/${{ matrix.configuration }}/${{ matrix.platform }}/publish/
+          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/Packages
