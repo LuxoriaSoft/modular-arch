@@ -115,8 +115,8 @@ namespace Luxoria.App
                             IModule module = loader.LoadModule(moduleFile);
                             if (module != null)
                             {
-                                // Initialize the module (you can uncomment when `IModuleContext` is ready)
-                                // module.Initialize(scope.ServiceProvider.GetService<IModuleContext>());
+                                // Initialize the module
+                                module.Initialize(scope.ServiceProvider.GetService<IModuleContext>());
 
                                 Debug.WriteLine($"Module loaded: {moduleName}");
                             }

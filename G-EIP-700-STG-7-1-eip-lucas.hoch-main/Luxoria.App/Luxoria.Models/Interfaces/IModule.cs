@@ -4,7 +4,7 @@
     {
         string Name { get; }
         string Description { get; }
-        void Initialize();
+        void Initialize(IModuleContext context);
         void Execute();
         void Shutdown();
     }
