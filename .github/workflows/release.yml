@@ -18,14 +18,14 @@ jobs:
       # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
 
       # Build the project
       - name: Build
         run: dotnet build --configuration Release --no-restore
-        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
       
       # Publish the app for Windows (Self-contained)
       - name: Publish
         run: dotnet publish -c Release -r win10-x64 --self-contained --output ./publish
-        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main
+        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
