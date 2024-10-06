@@ -52,5 +52,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Upload app
-          path: ${{ env.Solution_Name }}\\bin
-        working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
+          path: .\\G-EIP-700-STG-7-1-eip-lucas.hoch-main\\Luxoria.App\\${{ env.Solution_Name }}\\bin
