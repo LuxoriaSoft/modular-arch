@@ -42,9 +42,9 @@ jobs:
           Platform: ${{ matrix.platform }}
         working-directory: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App
       
-      # Upload the app
+      # Upload the published app
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
-          name: Upload app
-          path: .\\G-EIP-700-STG-7-1-eip-lucas.hoch-main\\Luxoria.App\\${{ env.Solution_Name }}\\bin
+          name: LuxoriaApp
+          path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/publish/*
