@@ -59,7 +59,7 @@ jobs:
         shell: pwsh
       
       - name: Zip the published app
-        run: Compress-Archive -Path ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/Packages -DestinationPath ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.${{matrix.platform}}.zip
+        run: Compress-Archive -Path ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/Luxoria.App/Packages -DestinationPath ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.${{matrix.platform}}.zip
         shell: pwsh
       
       # Upload the published app
