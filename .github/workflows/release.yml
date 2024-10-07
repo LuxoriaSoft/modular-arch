@@ -59,12 +59,12 @@ jobs:
         shell: pwsh
       
       - name: Zip the published app
-        run: Compress-Archive -Path ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/ -DestinationPath ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.${{matrix.platform}}.zip
+        run: Compress-Archive -Path ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App/Packages -DestinationPath ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.${{matrix.platform}}.zip
         shell: pwsh
       
       # Upload the published app
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
-          name: LuxoriaApp.${{matrix.platform}}
+          name: Luxoria.App.${{matrix.platform}}
           path: ./G-EIP-700-STG-7-1-eip-lucas.hoch-main/Luxoria.App.${{matrix.platform}}.zip
