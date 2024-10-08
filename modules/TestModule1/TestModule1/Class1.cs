@@ -1,4 +1,4 @@
-﻿using Luxoria.Core;
+﻿using Luxoria.Modules.Interfaces;
 using System.Diagnostics;
 
 namespace TestModule1
@@ -6,9 +6,9 @@ namespace TestModule1
     public class Class1 : IModule
     {
         public string Name => "TestModule1";
-
         public string Description => "Basic module for testing purposes";
-        public void Initialize(IModuleContext context)
+        public string Version => "1.0.0";
+        public void Initialize(IEventBus eventBus, IModuleContext context)
         {
             Debug.WriteLine("TestModule1 initialized");
         }

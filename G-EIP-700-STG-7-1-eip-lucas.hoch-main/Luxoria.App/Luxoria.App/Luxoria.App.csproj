@@ -18,6 +18,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
+    <None Remove="Components\MainMenuBarComponent.xaml" />
     <None Remove="SplashScreen.xaml" />
   </ItemGroup>
 
@@ -53,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="SplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Components\MainMenuBarComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -7,8 +7,4 @@
 	<OutputType>Library</OutputType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Luxoria.Models\Luxoria.Core.csproj" />
-  </ItemGroup>
-
 </Project>

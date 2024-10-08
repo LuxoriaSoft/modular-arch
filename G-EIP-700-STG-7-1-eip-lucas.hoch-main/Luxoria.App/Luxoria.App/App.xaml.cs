@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System;
 using Luxoria.Core.Interfaces;
+using Luxoria.Modules.Interfaces;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -59,7 +60,7 @@ namespace Luxoria.App
             splashScreen.Activate();
 
             Log("Modules loaded. Closing splash screen...");
-            await Task.Delay(2000);
+            await Task.Delay(500);
 
             // Load modules asynchronously and update the splash screen with the module names
             await LoadModulesAsync(splashScreen);
@@ -109,7 +110,7 @@ namespace Luxoria.App
                     });
 
                     // Small delay to ensure the splash screen updates properly
-                    await Task.Delay(500); // 0.5 second delay
+                    await Task.Delay(200); // 0.5 second delay
 
                     try
                     {
@@ -122,6 +123,7 @@ namespace Luxoria.App
                                 // Display module information
                                 Debug.WriteLine($"Module loaded: {moduleName}");
                                 Debug.WriteLine($"Module name: {module.Name}");
+                                Debug.WriteLine($"Module version: {module.Version}");
                                 Debug.WriteLine($"Module description: {module.Description}");
                                 // Save the module to ModuleService
                                 _moduleService.AddModule(module);
@@ -153,7 +155,7 @@ namespace Luxoria.App
                 });
 
                 // Small delay to ensure the splash screen updates properly
-                await Task.Delay(500); // 0.5 second delay
+                await Task.Delay(100); // 0.5 second delay
                 _moduleService.InitializeModules(new ModuleContext());
             }
         }

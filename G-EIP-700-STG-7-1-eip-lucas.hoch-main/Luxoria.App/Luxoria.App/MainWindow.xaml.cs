@@ -13,11 +13,13 @@ namespace Luxoria.App
         public MainWindow()
         {
             this.InitializeComponent();
+            Initialize();
+
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        public void Initialize()
         {
-            myButton.Content = "Clicked";
+            
         }
     }
 }
