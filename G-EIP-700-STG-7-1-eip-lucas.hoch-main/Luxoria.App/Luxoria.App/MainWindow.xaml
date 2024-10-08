@@ -10,6 +10,7 @@
     mc:Ignorable="d">
 
     <Grid x:Name="MainGrid">
-        <components:MainMenuBarComponent x:Name="MainMenuBar" />
+        <TextBox x:Name="InputTextBox" Width="300" Margin="10" PlaceholderText="Enter some text here..." />
+        <Button Content="Send to Module" Click="SendToModule_Click" Margin="10" />
     </Grid>
 </Window>

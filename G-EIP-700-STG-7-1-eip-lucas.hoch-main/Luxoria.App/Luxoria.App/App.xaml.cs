@@ -71,7 +71,8 @@ namespace Luxoria.App
                 splashScreen.Close();
             });
 
-            m_window = new MainWindow();
+            var eventBus = _host.Services.GetRequiredService<IEventBus>();
+            m_window = new MainWindow(eventBus);
             m_window.Activate();
         }
 
